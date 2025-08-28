@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h2>Payment for @ViewBag.ServiceName</h2>
+
+<p><strong>Price:</strong> @ViewBag.Price.ToString("C")</p>
+
+<form asp-action="Payment" method="post">
+    <input type="hidden" name="serviceRequestId" value="@ViewBag.ServiceRequestId" />
+    <input type="hidden" name="serviceId" value="@ViewBag.ServiceId" />
+
+    <div class="form-group">
+        <label>Payment Method</label>
+        <select name="paymentMethod" class="form-control" required>
+            <option value="Online">Bkash</option>
+            <option value="Online">Nagad</option>
+            <option value="Online">Card</option>
+            <option value="Online">Bank</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Pay Online</button>
+</form>

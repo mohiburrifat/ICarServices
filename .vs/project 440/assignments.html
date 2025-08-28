@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Assignments - Rifat's Smart Warehouse</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      color: #007acc;
+      margin: 15px 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: #007acc;
+      padding: 10px 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+    }
+
+    .navbar a:hover {
+      background-color: #005f8c;
+    }
+
+    section {
+      background: white;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f8c;
+    }
+
+    #assignmentStatus {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .fail {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1 class="title">Rifat's Smart Warehouse</h1>
+    <nav class="navbar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="robots.html">Robots</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="assignments.html">Assignments</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <div class="container">
+    <section>
+      <label for="taskSelect">Choose Task:</label>
+      <select id="taskSelect"></select>
+
+      <label for="robotSelect">Available Robots:</label>
+      <select id="robotSelect"></select>
+
+      <button onclick="assignRobot()">Assign</button>
+
+      <div id="assignmentStatus"></div>
+    </section>
+  </div>
+
+  <script>
+    const robots = [
+      { id: "RBT-204", model: "Model A", battery: 22, maxLoad: 500, emergency: false },
+      { id: "RBT-408", model: "Model B", battery: 78, maxLoad: 300, emergency: false },
+      { id: "RBT-303", model: "Model C", battery: 95, maxLoad: 800, emergency: true },
+      { id: "RBT-900", model: "Model D", battery: 88, maxLoad: 600, emergency: true }
+    ];
+
+    const tasks = [
+      { id: "TK-556", pick: "Zone A", drop: "Zone D", weight: 250, start: "2025-05-10 14:00", emergency: false },
+      { id: "TK-559", pick: "Zone B", drop: "Zone F", weight: 180, start: "2025-05-10 15:30", emergency: true },
+      { id: "TK-909", pick: "Zone C", drop: "Zone H", weight: 1200, start: "2025-05-10 16:00", emergency: false },
+      { id: "TK-731", pick: "Zone G", drop: "Zone B", weight: 400, start: "2025-05-10 18:00", emergency: true },
+      { id: "TK-430", pick: "Zone A", drop: "Zone E", weight: 95, start: "2025-05-10 17:15", emergency: false }
+    ];
+
+    // Populate dropdowns
+    window.onload = () => {
+      const taskSelect = document.getElementById("taskSelect");
+      const robotSelect = document.getElementById("robotSelect");
+
+      tasks.forEach(task => {
+        const opt = document.createElement("option");
+        opt.value = task.id;
+        opt.textContent = `${task.id} (${task.weight}kg) [${task.emergency ? 'Emergency' : 'Normal'}]`;
+        taskSelect.appendChild(opt);
+      });
+
+      robots.forEach(robot => {
+        const opt = document.createElement("option");
+        opt.value = robot.id;
+        opt.textContent = `${robot.id} (${robot.model}) [Battery: ${robot.battery}%] [Max: ${robot.maxLoad}kg]${robot.emergency ? ' [Emergency]' : ''}`;
+        robotSelect.appendChild(opt);
+      });
+    };
+
+    function assignRobot() {
+      const taskID = document.getElementById("taskSelect").value;
+      const robotID = document.getElementById("robotSelect").value;
+      const status = document.getElementById("assignmentStatus");
+
+      const task = tasks.find(t => t.id === taskID);
+      const robot = robots.find(r => r.id === robotID);
+
+      if (!task || !robot) {
+        status.textContent = "Invalid selection.";
+        status.className = "fail";
+        return;
+      }
+
+      if (robot.battery < 25) {
+        status.textContent = `⚠️ Cannot assign. ${robot.id} has low battery (${robot.battery}%).`;
+        status.className = "fail";
+        return;
+      }
+
+      if (task.weight > robot.maxLoad) {
+        status.textContent = `⚠️ Overload! Task requires ${task.weight}kg, robot supports up to ${robot.maxLoad}kg.`;
+        status.className = "fail";
+        return;
+      }
+
+      if (task.emergency && !robot.emergency) {
+        status.textContent = `⚠️ Emergency task requires emergency-ready robot. ${robot.id} is not emergency-ready.`;
+        status.className = "fail";
+        return;
+      }
+
+      status.textContent = `✅ Task ${task.id} successfully assigned to ${robot.id}.`;
+      status.className = "success";
+    }
+  </script>
+</body>
+</html>

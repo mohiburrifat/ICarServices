@@ -1,0 +1,61 @@
+@model I_Car_Services.Models.ServiceRequest
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Service Request Details</h3>
+
+    <!-- Customer Information -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Customer Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Name:</strong> @ViewBag.CustomerName</p>
+            <p><strong>Customer ID:</strong> @Model.CustomerId</p>
+        </div>
+    </div>
+
+    <!-- Service Provider Information -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Service Provider Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Provider Name:</strong> @ViewBag.ServiceProviderName</p>
+            <p><strong>Service Type:</strong> @Model.ServiceType</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+            <p><strong>Request Time:</strong> @Model.RequestTime.ToString("g")</p>
+        </div>
+    </div>
+
+    <!-- Status Information -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Status Information</h5>
+        </div>
+        <div class="card-body">
+ <p><strong>Status:</strong> @Model.Status</p>
+        </div>
+    </div>
+
+    <!-- Update Service Request Status -->
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">Update Service Request Status</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" action="@Url.Action("UpdateStatus", "ServiceCenter", new { id = Model.Id })">
+                <div class="form-group">
+                    <label for="Status">Select Status</label>
+                <select id="Status" name="status" class="form-control">
+                    <option value="Pending">@Model.Status</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Update Status</button>
+            </form>
+        </div>
+    </div>
+</div>
+

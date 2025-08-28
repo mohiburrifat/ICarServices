@@ -1,0 +1,45 @@
+@model List<MyServiceProvider>
+
+@{
+    ViewData["Title"] = "Service Providers";
+}
+
+<h2>Service Providers</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Business Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var provider in Model)
+        {
+            <tr>
+                <td>@provider.BusinessName</td>
+                <td>@provider.Email</td>
+                <td>
+                    @if (provider.IsApproved)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactive</span>
+                    }
+                </td>
+                <td>
+                    <form asp-action="ToggleApproval" asp-controller="Admin" method="post">
+                        <input type="hidden" name="id" value="@provider.Id" />
+                        <button type="submit" class="btn btn-sm @(provider.IsApproved ? "btn-danger" : "btn-success")">
+                            @(provider.IsApproved ? "Deactivate" : "Activate")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

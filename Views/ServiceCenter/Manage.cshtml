@@ -1,0 +1,32 @@
+@model IEnumerable<I_Car_Services.Models.Service>
+
+@{
+    ViewBag.Title = "Manage Services";
+}
+
+<h2>Manage Services</h2>
+
+<a class="btn btn-primary mb-3" asp-action="Add">Add New Service</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.Name</td>
+                <td>@service.Price.ToString("C")</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@service.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@service.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,52 @@
+@{
+    Layout = "_Layout"; // Or use a custom layout if needed
+}
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h2>Service Center Balance</h2>
+        <hr />
+        <div class="row mt-4">
+            <!-- Display Total Payments, Admin Commission, and Balance -->
+            <div class="col-md-6 offset-md-3">
+                <h4>Your Total Payment:</h4>
+                <h3>@ViewBag.TotalPayments.ToString("C")</h3>
+                <p>Total amount paid for the services provided.</p>
+
+                <h4>IcarService's 5% Commission:</h4>
+                <h3>@ViewBag.AdminCommission.ToString("C")</h3>
+                <p>The amount deducted by admin as commission.</p>
+
+                <h4>Your Balance:</h4>
+                <h3>@ViewBag.Balance.ToString("C")</h3>
+                <p>This is the amount you can withdraw or use in other service payments.</p>
+            </div>
+        </div>
+
+        <!-- Display List of Payments -->
+        <div class="mt-4">
+            <h4>Payment History</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Service Request ID</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var payment in ViewBag.Payments as List<I_Car_Services.Models.Payment>)
+                    {
+                        <tr>
+                            <td>@payment.Id</td>
+                            <td>@payment.ServiceRequestId</td>
+                            <td>@payment.Amount.ToString("C")</td>
+                            <td>@payment.PaidAt.ToString("MM/dd/yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

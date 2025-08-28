@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tasks - Rifat's Smart Warehouse</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0 10px;
+    }
+
+    table {
+      width: 95%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007acc;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .emergency-task {
+      background-color: #ffe0e0 !important;
+    }
+
+    .overload {
+      background-color: #fff3cd !important;
+    }
+
+    button {
+      padding: 6px 12px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f8c;
+    }
+
+    .add-task-btn {
+      display: block;
+      margin: 20px auto;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: #007acc;
+      padding: 10px 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+    }
+
+    .navbar a:hover {
+      background-color: #005f8c;
+    }
+
+    .title {
+      font-size: 2rem;
+      color: #007acc;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header and Navigation -->
+  <header>
+    <h1 class="title">Rifat's Smart Warehouse</h1>
+    <nav class="navbar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="robots.html">Robots</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="assignments.html">Assignments</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Pick Location</th>
+          <th>Drop Location</th>
+          <th>Weight</th>
+          <th>Start Time</th>
+          <th>Emergency</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="taskTable">
+        <tr>
+          <td>TK-556</td>
+          <td>Zone A</td>
+          <td>Zone D</td>
+          <td>250kg</td>
+          <td>2025-05-10 14:00</td>
+          <td>No</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+        <tr class="emergency-task">
+          <td>TK-559</td>
+          <td>Zone B</td>
+          <td>Zone F</td>
+          <td>180kg</td>
+          <td>2025-05-10 15:30</td>
+          <td>Yes</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+        <tr class="overload">
+          <td>TK-909</td>
+          <td>Zone C</td>
+          <td>Zone H</td>
+          <td>1200kg</td>
+          <td>2025-05-10 16:00</td>
+          <td>No</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+        <tr>
+          <td>TK-430</td>
+          <td>Zone A</td>
+          <td>Zone E</td>
+          <td>95kg</td>
+          <td>2025-05-10 17:15</td>
+          <td>No</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+        <tr class="emergency-task">
+          <td>TK-731</td>
+          <td>Zone G</td>
+          <td>Zone B</td>
+          <td>400kg</td>
+          <td>2025-05-10 18:00</td>
+          <td>Yes</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="add-task-btn" onclick="openTaskForm()">Add Task</button>
+  </main>
+
+  <script>
+    function openTaskForm() {
+      alert("Task form will open (not implemented here).");
+    }
+  </script>
+</body>
+</html>

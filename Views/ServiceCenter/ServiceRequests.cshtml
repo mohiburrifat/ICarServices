@@ -1,0 +1,31 @@
+@model List<I_Car_Services.Models.ServiceRequest>
+
+<div class="container mt-5">
+    <h3 class="text-center mb-3">Your Service Requests</h3>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Customer ID</th>
+                <th>Service Type</th>
+                <th>Status</th>
+                <th>Request Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var req in Model)
+            {
+                <tr>
+                    <td>@req.CustomerId</td>
+                    <td>@req.ServiceType</td>
+                    <td>@req.Status</td>
+                    <td>@req.RequestTime.ToString("g")</td>
+                    <td>
+                        <a href="@Url.Action("ViewServiceRequest", "ServiceCenter", new { id = req.Id })" class="btn btn-info">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,58 @@
+
+@model I_Car_Services.Models.MyServiceProvider
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center">Service Center Registration</h3>
+                </div>
+                <div class="card-body">
+                    @if (ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div class="alert alert-danger">
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                <div>@error.ErrorMessage</div>
+                            }
+                        </div>
+                    }
+
+                    <form method="post">
+                        <input type="hidden" asp-for="Role" value="ServiceProvider" />
+                        <input type="hidden" asp-for="IsApproved" value="true" />
+
+                        <div class="mb-3">
+                            <label asp-for="BusinessName" class="form-label">Business Name*</label>
+                            <input asp-for="BusinessName" class="form-control" required />
+                            <span asp-validation-for="BusinessName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email*</label>
+                            <input asp-for="Email" type="email" class="form-control" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PasswordHash" class="form-label">Password*</label>
+                            <input asp-for="PasswordHash" type="password" class="form-control" required />
+                            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Register as Service Center</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-action="Login" class="text-primary">Already registered? Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

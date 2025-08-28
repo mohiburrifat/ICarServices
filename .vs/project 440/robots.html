@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Robots - Rifat's Smart Warehouse</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4f6f9;
+    }
+
+    header {
+      background-color: #fcfbfb;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+    }
+
+    .navbar a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      background-color: #005f8c;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    #robotList {
+      margin-top: 20px;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #00ccc5;
+      color: white;
+    }
+
+    td {
+      color: #333;
+    }
+
+    .emergency {
+      color: red;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #cc0036;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #005f8c;
+    }
+
+    .notifications-btn {
+      margin-top: 20px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <main>
+    <section id="robotList">
+      <h2>Robots</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Model</th>
+            <th>Battery</th>
+            <th>Last Service</th>
+            <th>Emergency</th>
+          </tr>
+        </thead>
+        <tbody id="robotTableBody">
+          <!-- Robot data will be inserted dynamically here -->
+        </tbody>
+      </table>
+    </section>
+
+    <button class="notifications-btn" onclick="window.location.href='notifications.html'">View Notifications</button>
+  </main>
+
+  <script>
+    // Include header HTML
+    document.getElementById('header').innerHTML = `
+      <header>
+        <div class="container">
+          <h1 class="title">Rifat's Smart Warehouse</h1>
+          <nav class="navbar">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="robots.html">Robots</a>
+            <a href="tasks.html">Tasks</a>
+            <a href="assignments.html">Assignments</a>
+          </nav>
+        </div>
+      </header>
+    `;
+
+    // Robot data
+    const robots = [
+      { id: "RBT-204", model: "T-1000", battery: 22, lastService: "2025-04-10", emergency: false },
+      { id: "RBT-408", model: "Robo-X", battery: 78, lastService: "2025-04-03", emergency: false },
+      { id: "RBT-303", model: "Xplorer 3000", battery: 95, lastService: "2025-04-28", emergency: true },
+      { id: "RBT-900", model: "Titan-X", battery: 88, lastService: "2025-04-01", emergency: true }
+    ];
+
+    // Dynamically populate robot table
+    function loadRobotData() {
+      const tableBody = document.getElementById("robotTableBody");
+      tableBody.innerHTML = ""; // Clear existing table rows
+
+      robots.forEach(robot => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${robot.id}</td>
+          <td>${robot.model}</td>
+          <td>${robot.battery}%</td>
+          <td>${robot.lastService}</td>
+          <td class="${robot.emergency ? 'emergency' : ''}">${robot.emergency ? 'Yes' : 'No'}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Initialize page
+    window.onload = loadRobotData;
+  </script>
+</body>
+</html>

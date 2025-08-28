@@ -1,0 +1,20 @@
+@model I_Car_Services.Models.Service
+
+<div class="container mt-5">
+    <div class="col-md-6 offset-md-3">
+        <h3 class="text-center mb-3">Add New Service</h3>
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Service Name</label>
+                <input asp-for="Name" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label">Price</label>
+                <input asp-for="Price" class="form-control" type="number" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Add Service</button>
+        </form>
+    </div>
+</div>

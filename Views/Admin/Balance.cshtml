@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Admin Balance Overview";
+    var providers = ViewData["ProviderInfoWithBalance"] as List<object>;
+    var adminBalance = ViewData["AdminBalance"] as decimal? ?? 0;
+}
+
+<h2>Admin Balance Overview</h2>
+
+<div class="alert alert-info">
+    <strong>Admin's Total Balance:</strong> @String.Format("{0:C}", adminBalance)
+</div>
+
+<h3>Service Provider Balances</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Business Name</th>
+            <th>Total Payments</th>
+            <th>Commission (5%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (providers != null && providers.Count > 0)
+        {
+            foreach (dynamic provider in providers)
+            {
+                <tr>
+                    <td>@provider.BusinessName</td>
+                    <td>@String.Format("{0:C}", provider.TotalPayments)</td>
+                    <td>@String.Format("{0:C}", provider.Commission)</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">No data available</td>
+            </tr>
+        }
+    </tbody>
+</table>

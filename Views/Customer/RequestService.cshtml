@@ -1,0 +1,30 @@
+@model I_Car_Services.Models.ServiceRequest
+@{
+    ViewData["Title"] = "Request Service";
+}
+
+<h2>Request Service - @ViewBag.ServiceName</h2>
+
+<form asp-action="RequestService" method="post">
+    <input type="hidden" name="serviceId" value="@ViewBag.ServiceId" />
+
+    <div class="form-group">
+        <label>Service Type</label>
+        <input asp-for="ServiceType" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Address</label>
+        <input asp-for="Address" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Payment Method</label>
+        <select asp-for="PaidOnline" class="form-control">
+            <option value="true">Online</option>
+            <option value="false">Cash</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit Request</button>
+</form>

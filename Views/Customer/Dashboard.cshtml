@@ -1,0 +1,38 @@
+@model List<I_Car_Services.Models.ServiceWithProviderViewModel>
+
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Available Services</h2>
+    <table class="table table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>Service ID</th>
+                <th>Service Name</th>
+                <th>Price</th>
+                <th>Service Center</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Service.Id</td>
+                <td>@item.Service.Name</td>
+                <td>@item.Service.Price.ToString("C")</td>
+                <td>@item.ServiceProvider.BusinessName</td>
+                <td>@item.ServiceProvider.Email</td>
+                <td>
+                    <a asp-controller="Customer" asp-action="RequestService" asp-route-serviceId="@item.Service.Id" class="btn btn-sm btn-success">Send Request</a>
+
+                
+                      </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

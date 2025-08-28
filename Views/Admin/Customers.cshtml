@@ -1,0 +1,37 @@
+@model IEnumerable<I_Car_Services.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Customer List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.Email</td>
+                <td>@customer.PhoneNumber</td>
+                <td>@(customer.Customer_IsApproved ? "Active" : "Inactive")</td>
+                <td>
+                    <form method="post" asp-action="ToggleCustomerApproval" asp-route-id="@customer.Id">
+                        <button type="submit" class="btn @(customer.Customer_IsApproved ? "btn-danger" : "btn-success")">
+                            @(customer.Customer_IsApproved ? "Deactivate" : "Activate")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

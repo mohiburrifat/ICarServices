@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notifications</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .notification {
+      background-color: #fff3cd;
+      border-left: 6px solid #ffc107;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .notification.error {
+      background-color: #f8d7da;
+      border-left-color: #dc3545;
+    }
+
+    .notification.success {
+      background-color: #d4edda;
+      border-left-color: #28a745;
+    }
+
+    .notification.warning {
+      background-color: #fff3cd;
+      border-left-color: #ffc107;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>System Notifications</h1>
+  </header>
+
+  <main>
+    <ul id="notificationList">
+      <!-- Hardcoded Notifications as Examples -->
+      <li class="notification warning">
+        ⚠️ Robot RBT-204's battery is below 25% (22%). Please recharge.
+      </li>
+      <li class="notification error">
+        🔧 Robot RBT-107's last service date was 50 days ago. Immediate maintenance required.
+      </li>
+      <li class="notification success">
+        ✅ Task TK-556 successfully assigned to Robot RBT-303.
+      </li>
+      <li class="notification warning">
+        ⚠️ Robot RBT-408 is due for service in 5 days.
+      </li>
+      <li class="notification error">
+        ❌ Task TK-909 assignment failed – load (120kg) exceeds Robot RBT-102's max capacity (100kg).
+      </li>
+    </ul>
+  </main>
+</body>
+</html>
